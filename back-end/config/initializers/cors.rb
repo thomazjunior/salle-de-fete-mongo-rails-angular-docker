@@ -14,3 +14,11 @@
 #       methods: [:get, :post, :put, :patch, :delete, :options, :head]
 #   end
 # end
+
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+    allow do
+      origins 'http://localhost:4200' # adjust this URL based on your setup
+      resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options, :head]
+    end
+  end
+  

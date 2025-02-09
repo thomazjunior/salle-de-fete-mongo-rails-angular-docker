@@ -11,6 +11,7 @@ gem "puma", ">= 5.0"
 # mongodb
 gem "mongoid", "~> 8.0"
 gem 'dotenv', groups: [:development, :test]
+gem 'rack-cors'
 
 
 
