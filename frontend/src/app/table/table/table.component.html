@@ -1,0 +1,44 @@
+<div *ngIf="rows.length > 0; else noData" class="generic-table">
+  <table>
+    <thead>
+      <tr>
+        <!-- Dynamically generate column headers with optional column width and height -->
+        <th
+          *ngFor="let column of columns"
+          [ngStyle]="{ width: column.width, height: column.height }"
+        >
+          {{ column.displayName | titlecase }}
+        </th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Dynamically generate table rows with column widths and heights -->
+      <tr *ngFor="let row of rows">
+        <td
+          *ngFor="let column of columns"
+          [ngStyle]="{'max-width': column.width, height: column.height }"
+        >
+          {{ row[column.backendName] || "N/A" }}
+        </td>
+        <td>
+          <div class="actions-container">
+            <button
+              *ngFor="let action of actions"
+              (click)="action.handler(row)"
+              [ngClass]="getButtonClass(action)"
+              [attr.aria-label]="action.label"
+            >
+              <!-- Dynamically set button content -->
+              <span>{{ action.icon }}</span>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noData>
+  <p>No data available.</p>
+</ng-template>

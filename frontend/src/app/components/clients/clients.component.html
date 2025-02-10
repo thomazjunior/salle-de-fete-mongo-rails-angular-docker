@@ -1,0 +1,15 @@
+<div class="clients-container">
+  <h2>Client Management</h2>
+
+  <div class="clients-header">
+    <input
+      type="text"
+      placeholder="Search clients..."
+      (input)="onSearch($event)"
+    />
+    <button (click)="openCreateClientModal()">+ Add Client</button>
+  </div>
+
+  <!-- Use the generic TableComponent here -->
+  <app-table [rows]="clients" [columns]="columns" [actions]="actions"></app-table>
+</div>

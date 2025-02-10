@@ -1,0 +1,125 @@
+.generic-table {
+  max-width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: var(--primary-bg-color);
+  overflow-x: auto; 
+  table-layout: fixed; 
+
+  th,
+  td {
+    max-width: 100%; /* Ensures columns take up available space */
+    padding: 12px 20px;
+    text-align: left;
+    font-size: 16px;
+    color: var(--text-color);
+    word-wrap: break-word;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Show ellipsis for overflowing text */
+  }
+
+  th {
+    background-color: var(--header-bg-color);
+    font-weight: bold;
+    line-height: normal;
+    height: auto;
+  }
+
+  tr:nth-child(odd) {
+    background-color: var(--secondary-bg-color);
+  }
+
+  tr:nth-child(even) {
+    background-color: #f1f1f1;
+  }
+
+  tr:hover {
+    background-color: #e0e0e0;
+  }
+
+  td {
+    font-size: 14px;
+    color: var(--text-color);
+    overflow: hidden; /* Hide any content that overflows */
+    text-overflow: ellipsis; /* Display ellipsis if content overflows */
+  }
+
+  .actions-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      transition: background-color 0.3s ease;
+
+      &.edit-button {
+        background-color: var(--button-edit-bg-color);
+        &:hover {
+          background-color: var(--button-edit-hover-bg-color);
+        }
+      }
+
+      &.delete-button {
+        background-color: var(--button-delete-bg-color);
+        &:hover {
+          background-color: var(--button-delete-hover-bg-color);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    font-size: 14px; /* Adjust font size for larger tablets */
+    padding: 10px;
+
+    th,
+    td {
+      padding: 8px 12px;
+      text-overflow: ellipsis; /* Show ellipsis on smaller screens */
+      width: 100%; /* Ensure columns take up full width */
+    }
+
+    .actions-container {
+      flex-direction: column;
+      gap: 5px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    padding: 8px;
+
+    th,
+    td {
+      padding: 6px 10px;
+      text-overflow: ellipsis; /* Show ellipsis on smaller screens */
+      white-space: nowrap; /* Prevent text from wrapping */
+      max-width: 100%; /* Ensures columns take up full width */
+    }
+
+    .actions-container {
+      flex-direction: column;
+      gap: 5px;
+    }
+  }
+
+  /* Ensure that the table is scrollable horizontally on small screens */
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 15px;
+  }
+}

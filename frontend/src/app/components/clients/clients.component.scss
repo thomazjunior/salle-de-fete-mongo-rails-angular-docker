@@ -1,0 +1,70 @@
+.clients-container {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background: var(--primary-bg-color); // Dynamic background color
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  @media (min-width: 600px) {
+    padding: 20px;
+  }
+
+  @media (min-width: 768px) {
+    max-width: 90%; // Responsive max-width on larger screens
+    padding: 30px;
+  }
+
+  @media (min-width: 992px) {
+    max-width: 1200px; // Set max-width for large screens
+    padding: 40px;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 1200px;
+    padding: 40px;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text-color); // Dynamic text color
+  }
+
+  .clients-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid var(--table-border-color); // Dynamic border color
+      border-radius: 4px;
+      color: var(--text-color); // Dynamic text color inside input
+
+      &::placeholder {
+        color: var(--text-color); // Dynamic placeholder color
+      }
+    }
+
+    button {
+      padding: 8px 12px;
+      background: var(--button-bg-color); // Dynamic button background
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:hover {
+        background: var(--button-hover-bg-color); // Dynamic hover effect
+      }
+    }
+  }
+
+  /* This section uses the generic table */
+  app-table {
+    margin-top: 20px;
+  }
+}

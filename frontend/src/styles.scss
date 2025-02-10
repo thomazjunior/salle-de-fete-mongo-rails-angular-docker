@@ -1,1 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global theme variables */
+:root {
+    /* Default (Light) Theme */
+    --primary-bg-color: #ffffff;
+    --secondary-bg-color: #f9f9f9;
+    --text-color: #333333;
+    --header-bg-color: #4c8eaf;
+    --button-bg-color: #007BFF;
+    --button-hover-bg-color: #0056b3;
+    --button-delete-bg-color: #dedbdb;
+    --button-delete-hover-bg-color: #dfdede;
+    --button-edit-bg-color: #dedbdb;
+    --button-edit-hover-bg-color: #dfdede;
+    --table-border-color: #dddddd;
+  }
+  
+  [data-theme='dark'] {
+    /* Dark Mode */
+    --primary-bg-color: #2c2c2c;
+    --secondary-bg-color: #3a3a3a;
+    --text-color: #ffffff;
+    --header-bg-color: #333333;
+    --button-bg-color: #007BFF;
+    --button-hover-bg-color: #0056b3;
+    --button-delete-bg-color: #dc3545;
+    --button-delete-hover-bg-color: #c82333;
+    --table-border-color: #444444;
+  }
+  
+  [data-theme='blue'] {
+    /* Blue Mode */
+    --primary-bg-color: #e0f7fa;
+    --secondary-bg-color: #b2ebf2;
+    --text-color: #01579b;
+    --header-bg-color: #0288d1;
+    --button-bg-color: #0288d1;
+    --button-hover-bg-color: #01579b;
+    --button-delete-bg-color: #f44336;
+    --button-delete-hover-bg-color: #d32f2f;
+    --table-border-color: #80deea;
+  }
+  
