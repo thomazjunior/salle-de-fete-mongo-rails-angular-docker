@@ -81,7 +81,7 @@ class ClientsController < ApplicationController
 
   # Définir les paramètres autorisés pour un client
   def client_params
-    params.require(:client).permit(:name, :email, :phone, :address)
+    params.require(:client).permit(:name, :email, :phone, :address, :phone_number)
   end
 
   # Définir les paramètres pour une liste de clients
