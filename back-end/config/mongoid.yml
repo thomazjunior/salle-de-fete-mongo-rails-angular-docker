@@ -1,6 +1,6 @@
-production: 
-  clients: 
-    default: 
+production:
+  clients:
+    default:
       #uri: "mongodb+srv://paulothomazjunior:Thz192900@salle-de-fete.tpduo.mongodb.net/salle-de-fete?retryWrites=true&w=majority&appName=salle-de-fete"
       uri: ENV['MONGODB_URI']
 
@@ -23,6 +23,11 @@ development:
       #  - localhost:27017
       options:
         database: salle-de-fete
+        retry_writes: true
+        connect_timeout: 30
+        socket_timeout: 60
+        max_pool_size: 10
+        server_selection_timeout: 10
         # Note that all options listed below are Ruby driver client options (the mongo gem).
         # Please refer to the driver documentation of the version of the mongo gem you are using
         # for the most up-to-date list of options.
@@ -67,6 +72,7 @@ development:
         # Changes the default time in seconds the server monitors refresh their status
         # via hello commands. (default: 10)
         # heartbeat_frequency: 10
+        heartbeat_frequency: 10000
 
         # The time in seconds for selecting servers for a near read preference. (default: 0.015)
         # local_threshold: 0.015
@@ -121,7 +127,7 @@ development:
         # The file containing concatenated certificate authority certificates
         # used to validate certs passed from the other end of the connection.
         # ssl_ca_cert: /path/to/ca.cert
-        
+
         # Whether to truncate long log lines. (default: true)
         # truncate_logs: true
 
@@ -132,15 +138,15 @@ development:
     # exceed 128 bytes. It is also used as the database name if the
     # database name is not explicitly defined. (default: nil)
     # app_name: MyApplicationName
-    
+
     # Mark belongs_to associations as required by default, so that saving a
     # model with a missing belongs_to association will trigger a validation
     # error. (default: true)
     # belongs_to_required_by_default: true
-    
+
     # Raise an exception when a field is redefined. (default: false)
     # duplicate_fields_exception: false
-    
+
     # Include the root model name in json serialization. (default: false)
     # include_root_in_json: false
 
@@ -154,7 +160,7 @@ development:
     # Set the Mongoid and Ruby driver log levels when Mongoid is not using
     # Ruby on Rails logger instance. (default: :info)
     # log_level: :info
-    
+
     # Preload all models in development, needed when models use
     # inheritance. (default: false)
     # preload_models: false
