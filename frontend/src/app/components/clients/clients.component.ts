@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
 import { Client } from '../../models/client.model';
 import { ClientService } from '../../services/client.service';
 import { TableComponent } from '../../table/table/table.component';
@@ -7,14 +8,20 @@ import { TableComponent } from '../../table/table/table.component';
 @Component({
   selector: 'app-clients',
   standalone: true,
-  imports: [CommonModule, TableComponent],
+  imports: [CommonModule, TableComponent, FormsModule],
   templateUrl: './clients.component.html',
   styleUrls: ['./clients.component.scss'],
 })
 export class ClientsComponent implements OnInit {
   clients: Client[] = [];
-  topClients: Client[] = [];
+  newClient: Client = {
+    name: '',
+    email: '',
+    phone_number: '',
+    address: '',
+  };
   searchQuery: string = '';
+  isModalOpen: boolean = false;
 
   columns = [
     { displayName: 'Nome', backendName: 'name', width: '200px' },
@@ -47,8 +54,7 @@ export class ClientsComponent implements OnInit {
     this.clientService.getClients().subscribe({
       next: (data) => {
         this.clients = data;
-        console.log('Fechted clients:', this.clients);
-        this.fetchTopClients(); // Populate top clients when clients are fetched
+        console.log('Fetched clients:', this.clients);
       },
       error: (error) => {
         console.error('Error fetching clients:', error);
@@ -56,47 +62,31 @@ export class ClientsComponent implements OnInit {
     });
   }
 
-  // Fetch top clients based on specific logic (e.g., based on the number of books ordered)
-  fetchTopClients(): void {
-    this.topClients = this.clients.filter((client) => true); //TODO: implement this logic
-  }
-
-  // Search clients based on name or other fields
-  onSearch(event: any): void {
-    this.searchQuery = event.target.value.toLowerCase();
-    this.filterClients();
-  }
-
-  // Filter clients based on the search query
-  filterClients(): void {
-    this.clients = this.clients.filter(
-      (client) =>
-        client.name.toLowerCase().includes(this.searchQuery) ||
-        client.email.toLowerCase().includes(this.searchQuery)
-    );
-  }
-
-  // Add client (can open a modal for adding client, or call a service to open modal)
+  // Open the modal
   openCreateClientModal(): void {
-    // Logic for opening a modal goes here (You can use Angular Material dialog or custom modal)
-    console.log('Opening client creation modal...');
+    this.isModalOpen = true;
   }
 
-  // Edit client details (you can create a modal for editing)
-  editClient(client: Client): void {
-    console.log('Editing client:', client);
-    // Implement edit logic
+  // Close the modal
+  closeCreateClientModal(): void {
+    this.isModalOpen = false;
   }
 
-  // Delete a client
-  deleteClient(clientId: string): void {
-    this.clientService.deleteClient(clientId).subscribe({
-      next: () => {
-        console.log('Client deleted successfully');
-        this.fetchClients(); // Refresh the clients list
+  // Add a new client
+  addClient(): void {
+    this.clientService.addClient(this.newClient).subscribe({
+      next: (data) => {
+        console.log('Client added:', data);
+        this.clients.push(data);
+        this.newClient = {
+          name: '',
+          email: '',
+          address: '',
+          phone_number: '',
+        }; // Reset the form
       },
       error: (error) => {
-        console.error('Error deleting client:', error);
+        console.error('Error adding client:', error);
       },
     });
   }

@@ -48,23 +48,86 @@
         color: var(--text-color); // Dynamic placeholder color
       }
     }
-
-    button {
-      padding: 8px 12px;
-      background: var(--button-bg-color); // Dynamic button background
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-
-      &:hover {
-        background: var(--button-hover-bg-color); // Dynamic hover effect
-      }
-    }
   }
 
   /* This section uses the generic table */
   app-table {
     margin-top: 20px;
   }
+}
+
+.add-client-button-container {
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+  align-items: center; /* Center the button vertically */
+  bottom: 20px; /* Position it 20px from the bottom */
+  width: 100%; /* Full width */
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.add-client-button {
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px; /* Round corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase; /* Uppercase text */
+}
+
+.add-client-button:hover {
+  background-color: #45a049; /* Darken the background on hover */
+  transform: translateY(-3px); /* Slight lift on hover */
+}
+
+.add-client-button:active {
+  transform: translateY(1px); /* Pressed effect */
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001; /* Ensure modal is above the rest of the content */
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px; /* Control the modal width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.modal-actions button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-actions button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+}
+
+.modal-actions button[type="button"] {
+  background-color: #f44336;
+  color: white;
 }

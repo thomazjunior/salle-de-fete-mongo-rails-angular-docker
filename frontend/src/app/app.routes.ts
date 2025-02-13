@@ -6,5 +6,5 @@ import { AuthGuard } from './security/auth.guard';
 export const routes: Routes = [
   { path: '', component: LandpageComponent }, // Display Landpage at root
   { path: 'clients', component: ClientsComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '' } // Redirect unknown routes to root
+  { path: '**', redirectTo: '/clients' } // Redirect unknown routes to root
 ];
