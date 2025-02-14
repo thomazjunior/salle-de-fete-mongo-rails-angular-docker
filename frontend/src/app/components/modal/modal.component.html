@@ -1,0 +1,36 @@
+<div class="modal-overlay" *ngIf="isOpen" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h3>{{ mode === 'create' ? 'Create New Client' : 'Edit Client' }}</h3>
+      <form (ngSubmit)="saveClient()">
+        <label for="name">Name:</label>
+        <input id="name" [(ngModel)]="client.name" name="name" required />
+  
+        <label for="email">Email:</label>
+        <input id="email" [(ngModel)]="client.email" name="email" required />
+  
+        <label for="phone_number">Phone Number:</label>
+        <input
+          id="phone_number"
+          [(ngModel)]="client.phone_number"
+          name="phone_number"
+          required
+        />
+  
+        <label for="address">Address:</label>
+        <input
+          id="address"
+          [(ngModel)]="client.address"
+          name="address"
+          required
+        />
+  
+        <div class="modal-actions">
+          <button type="submit">
+            {{ mode === 'create' ? 'Add Client' : 'Save Changes' }}
+          </button>
+          <button type="button" (click)="closeModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

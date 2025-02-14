@@ -5,58 +5,25 @@
     <input type="text" placeholder="Search clients..." />
   </div>
 
-  <!-- Use the generic TableComponent here -->
+  <!-- Table for displaying clients -->
   <app-table
     [rows]="clients"
     [columns]="columns"
     [actions]="actions"
   ></app-table>
+
   <div class="add-client-button-container">
     <button class="add-client-button" (click)="openCreateClientModal()">
       + Add Client
     </button>
   </div>
 
-  <!-- Modal for adding a new client -->
-  <!-- Modal -->
-  <div
-    *ngIf="isModalOpen"
-    class="modal-overlay"
-    (click)="closeCreateClientModal()"
-  >
-    <div class="modal-content" (click)="$event.stopPropagation()">
-      <!-- Prevent modal from closing when clicking inside -->
-      <h3>Create New Client</h3>
-      <form (ngSubmit)="addClient()">
-        <label for="name">Name:</label>
-        <input id="name" [(ngModel)]="newClient.name" name="name" required />
-
-        <label for="email">Email:</label>
-        <input id="email" [(ngModel)]="newClient.email" name="email" required />
-
-        <label for="phone_number">Phone Number:</label>
-        <input
-          id="phone_number"
-          [(ngModel)]="newClient.phone_number"
-          name="phone_number"
-          required
-        />
-
-        <label for="address">Address:</label>
-        <input
-          id="address"
-          [(ngModel)]="newClient.address"
-          name="address"
-          required
-        />
-
-        <div class="modal-actions">
-          <button type="submit">Add Client</button>
-          <button type="button" (click)="closeCreateClientModal()">
-            Cancel
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
+  <!-- Reusable Modal Component -->
+  <app-client-modal
+    [isOpen]="isModalOpen"
+    [client]="selectedClient"
+    [mode]="modalMode"
+    (onClose)="closeClientModal()"
+    (onSave)="saveClient($event)"
+  ></app-client-modal>
 </div>
