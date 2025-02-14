@@ -26,4 +26,11 @@
     (onClose)="closeClientModal()"
     (onSave)="saveClient($event)"
   ></app-client-modal>
+  <app-confirm-dialog
+    [isOpen]="isConfirmDialogOpen"
+    title="Confirm Delete"
+    [message]="'Are you sure you want to delete ' + clientToDelete?.name + '?'"
+    (onConfirm)="confirmDelete()"
+    (onCancel)="cancelDelete()"
+  ></app-confirm-dialog>
 </div>

@@ -1,19 +1,28 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Client } from '../../models/client.model';
 import { ClientService } from '../../services/client.service';
 import { TableComponent } from '../../table/table/table.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { ClientModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-clients',
   standalone: true,
-  imports: [CommonModule, TableComponent, FormsModule, ClientModalComponent],
+  imports: [
+    CommonModule,
+    TableComponent,
+    FormsModule,
+    ClientModalComponent,
+    ConfirmDialogComponent,
+  ],
   templateUrl: './clients.component.html',
   styleUrls: ['./clients.component.scss'],
 })
 export class ClientsComponent implements OnInit {
+  @ViewChild(ConfirmDialogComponent) confirmDialog!: ConfirmDialogComponent;
+
   clients: Client[] = [];
   defaultClient: Client = {
     id: '0',
@@ -23,8 +32,10 @@ export class ClientsComponent implements OnInit {
     address: '',
   };
   selectedClient: Client = this.defaultClient;
-  isModalOpen: boolean = false;
+  isModalOpen = false;
   modalMode: 'create' | 'edit' = 'create';
+  clientToDelete: Client | null = null;
+  isConfirmDialogOpen = true;
 
   columns = [
     { displayName: 'Nome', backendName: 'name', width: '200px' },
@@ -50,7 +61,7 @@ export class ClientsComponent implements OnInit {
     },
     {
       label: 'Delete',
-      handler: (client: Client) => this.deleteClient(client),
+      handler: (client: Client) => this.openDeleteConfirmDialog(client),
       type: 'delete',
       icon: '❌',
     },
@@ -76,12 +87,7 @@ export class ClientsComponent implements OnInit {
 
   // Open the modal for creating a new client
   openCreateClientModal(): void {
-    this.selectedClient = {
-      name: '',
-      email: '',
-      phone_number: '',
-      address: '',
-    };
+    this.selectedClient = { ...this.defaultClient };
     this.modalMode = 'create';
     this.isModalOpen = true;
   }
@@ -110,10 +116,10 @@ export class ClientsComponent implements OnInit {
         },
       });
     } else if (this.modalMode === 'edit') {
-      this.clientService.updateClient('1', client).subscribe({
+      this.clientService.updateClient(client.email, client).subscribe({
         next: () => {
           this.clients = this.clients.map((c) =>
-            c.email === client.email ? client : c
+            c.id === client.id ? client : c
           );
         },
         error: (error) => {
@@ -124,15 +130,31 @@ export class ClientsComponent implements OnInit {
     this.closeClientModal();
   }
 
-  // Delete client
-  deleteClient(client: Client): void {
-    this.clientService.deleteClient(client.email).subscribe({
-      next: () => {
-        this.clients = this.clients.filter((c) => c.email !== client.email);
-      },
-      error: (error) => {
-        console.error('Error deleting client:', error);
-      },
-    });
+  // Open custom confirm dialog for client deletion
+  openDeleteConfirmDialog(client: Client): void {
+    this.clientToDelete = client;
+    this.isConfirmDialogOpen = true;
+  }
+
+  confirmDelete(): void {
+    if (this.clientToDelete) {
+      this.clientService.deleteClient(this.clientToDelete.email).subscribe({
+        next: () => {
+          this.clients = this.clients.filter(
+            (c) => c.id !== this.clientToDelete?.id
+          );
+          this.clientToDelete = null;
+          this.isConfirmDialogOpen = false;
+        },
+        error: (error) => {
+          console.error('Error deleting client:', error);
+        },
+      });
+    }
+  }
+
+  cancelDelete(): void {
+    this.isConfirmDialogOpen = false;
+    this.clientToDelete = null;
   }
 }
