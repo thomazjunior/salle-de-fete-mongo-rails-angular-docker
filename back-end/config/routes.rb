@@ -1,15 +1,24 @@
 Rails.application.routes.draw do
   get "clients/index"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Définissez vos routes d'application selon le DSL sur https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  # Vérifie l'état de santé de l'application sur /up 
+  # Renvoie 200 si l'application démarre sans exceptions, sinon 500.
+  # Utilisé par les équilibreurs de charge et les moniteurs de disponibilité.
   get "up" => "rails/health#show", as: :rails_health_check
+
+  # Routes pour toutes les actions CRUD dans BookingsController
+  resources :bookings
+  
+  # Routes pour ClientsController
   resources :clients, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+
+  # Routes pour PackagesController
   resources :packages, only: [:create]
-  resources :bookings, only: [:create]
+
+  # Routes pour PaymentsController
   resources :payments, only: [:create]
 
-  # Defines the root path route ("/")
+  # Définit la route racine ("/")
   # root "posts#index"
 end
