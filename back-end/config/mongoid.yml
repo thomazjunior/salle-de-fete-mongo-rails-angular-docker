@@ -190,10 +190,9 @@ development:
 test:
   clients:
     default:
-      database: salle_de_fete_api_test
-      hosts:
-        - localhost:27017
+      uri: <%= ENV['MONGODB_URI'] %>
       options:
+        database: salle-de-fete
         read:
           mode: :primary
         max_pool_size: 1

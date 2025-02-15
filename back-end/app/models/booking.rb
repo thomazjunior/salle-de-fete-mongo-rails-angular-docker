@@ -32,4 +32,10 @@ class Booking
   def total_payments
     payments.completed.sum(:amount)
   end
+
+    # Assuming you have start_time and end_time in your model
+    def duration_in_hours
+      return unless start_time && end_time
+      ((end_time - start_time) / 1.hour).round(2)
+    end
 end

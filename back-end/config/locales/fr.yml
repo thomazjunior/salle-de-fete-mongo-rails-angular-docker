@@ -1,0 +1,11 @@
+# config/locales/fr.yml
+fr:
+  activerecord:
+    errors:
+      messages:
+        blank: "ne peut pas être vide"
+  default: 
+    activerecord:
+      errors:
+        messages:
+          blank: "ne peut pas être vide"
