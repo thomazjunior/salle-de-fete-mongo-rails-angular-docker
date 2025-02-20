@@ -1,16 +1,27 @@
-# Be sure to restart your server when you modify this file.
+ActiveSupport::Inflector.inflections do |inflect|
+  # Irregular nouns related to Room Fest  
+  inflect.irregular 'booking', 'bookings'
+  inflect.irregular 'client', 'clients'
+  inflect.irregular 'incident', 'incidents'
+  inflect.irregular 'package', 'packages'
+  inflect.irregular 'payment', 'payments'
 
-# Add new inflection rules using the following format. Inflections
-# are locale specific, and you may define rules for as many different
-# locales as you wish. All of these examples are active by default:
-# ActiveSupport::Inflector.inflections(:en) do |inflect|
-#   inflect.plural /^(ox)$/i, "\\1en"
-#   inflect.singular /^(ox)en/i, "\\1"
-#   inflect.irregular "person", "people"
-#   inflect.uncountable %w( fish sheep )
-# end
+  # Pluralization rules (forcing correct pluralization of domain-specific words)
+  inflect.plural /^(room)$/i, '\1s'
+  inflect.plural /^(guest)$/i, '\1s'
+  inflect.singular /^(guests)$/i, 'guest'
 
-# These inflection rules are supported but not enabled by default:
-# ActiveSupport::Inflector.inflections(:en) do |inflect|
-#   inflect.acronym "RESTful"
-# end
+  # Handling acronyms & abbreviations commonly used in the system
+  inflect.acronym 'API' # Ensures API remains capitalized in class names
+  inflect.acronym 'ID'  # Keeps ID capitalized when converting between cases
+  inflect.acronym 'VAT' # Example for tax-related attributes
+  
+  # Uncountable words (they don’t have a plural form)
+  inflect.uncountable %w( information data feedback )
+
+  # Custom inflections for words that might cause issues in singular/plural transformations
+  inflect.irregular 'status', 'statuses'  # Avoids "stati" or other incorrect forms
+  inflect.irregular 'address', 'addresses'
+  inflect.irregular 'company', 'companies'
+  inflect.irregular 'analysis', 'analyses'  # Handles words with Greek/Latin pluralization
+end
