@@ -35,7 +35,9 @@ export class ClientsComponent implements OnInit {
   isModalOpen = false;
   modalMode: 'create' | 'edit' = 'create';
   clientToDelete: Client | null = null;
-  isConfirmDialogOpen = true;
+  isConfirmDialogOpen = false;
+
+
 
   columns = [
     { displayName: 'Nome', backendName: 'name', width: '200px' },
