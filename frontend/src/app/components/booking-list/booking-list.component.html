@@ -1,0 +1,7 @@
+<div *ngFor="let booking of bookings">
+    <p>Réservation pour {{ booking.client_name }} - <strong>{{ booking.status }}</strong></p>
+    <span *ngIf="booking.status === 'confirmed'" class="badge badge-success">Confirmée ✅</span>
+    <span *ngIf="booking.status === 'pending'" class="badge badge-warning">En attente ⏳</span>
+    <span *ngIf="booking.status === 'canceled'" class="badge badge-danger">Annulée ❌</span>
+  </div>
+  

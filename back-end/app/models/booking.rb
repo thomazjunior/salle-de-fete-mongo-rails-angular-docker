@@ -30,6 +30,7 @@ class Booking
 
   # Callbacks
   after_update :envoyer_email_confirmation, if: -> { saved_change_to_status? && status == 1 }
+  after_update :broadcast_booking_update
 
   # Methods
   def total_payments
@@ -40,8 +41,17 @@ class Booking
     return unless start_time && end_time
     ((end_time - start_time) / 1.hour).round(2)
   end
+  
+  
 
   private
+
+  def broadcast_booking_update
+    ActionCable.server.broadcast("booking_channel", {
+      type: "booking_update",
+      booking: self.as_json
+    })
+  end
 
   def envoyer_email_confirmation
     ConfirmationReservationJob.perform_later(id)
