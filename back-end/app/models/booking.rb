@@ -21,21 +21,30 @@ class Booking
   validates :start_time, presence: true
   validates :end_time, presence: true
   validates :number_of_guests, numericality: { greater_than: 0 }
-  validates :status, inclusion: { in: [1, 2, 3], message: "must be 1 (Confirmed), 2 (Pending), or 3 (Canceled)" }
+  validates :status, inclusion: { in: [1, 2, 3], message: "must be 1 (Confirmée), 2 (En attente), ou 3 (Annulée)" }
 
   # Scopes
   scope :confirmed, -> { where(status: 1) }
   scope :pending, -> { where(status: 2) }
   scope :canceled, -> { where(status: 3) }
 
+  # Callbacks
+  after_update :envoyer_email_confirmation, if: -> { saved_change_to_status? && status == 1 }
+
   # Methods
   def total_payments
     payments.completed.sum(:amount)
   end
 
-    # Assuming you have start_time and end_time in your model
-    def duration_in_hours
-      return unless start_time && end_time
-      ((end_time - start_time) / 1.hour).round(2)
-    end
+  def duration_in_hours
+    return unless start_time && end_time
+    ((end_time - start_time) / 1.hour).round(2)
+  end
+
+  private
+
+  def envoyer_email_confirmation
+    ConfirmationReservationJob.perform_later(id)
+  end
 end
+  

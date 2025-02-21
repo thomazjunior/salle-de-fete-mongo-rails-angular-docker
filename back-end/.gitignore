@@ -76,7 +76,3 @@ docker-compose.override.yml
 .github
 .gitattributes
 .rubocop.yml
-jobs
-mailers
-storage
-script
