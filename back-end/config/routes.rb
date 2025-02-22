@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   # Utilisé par les équilibreurs de charge et les moniteurs de disponibilité.
   get "up" => "rails/health#show", as: :rails_health_check
 
+  get '/sidekiq-stats', to: 'jobs#sidekiq_stats'
+  post '/trigger-birthday-job', to: 'jobs#trigger_birthday_job'
+
   # Routes pour toutes les actions CRUD dans BookingsController
   resources :bookings
   

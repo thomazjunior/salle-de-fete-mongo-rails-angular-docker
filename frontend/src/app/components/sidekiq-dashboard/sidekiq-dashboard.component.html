@@ -1,0 +1,11 @@
+<div class="dashboard">
+    <h2>Sidekiq Job Dashboard</h2>
+    <button (click)="triggerJob()">Trigger Birthday Job</button>
+    <div *ngIf="loading">Loading...</div>
+    <div *ngIf="!loading">
+      <p><strong>Processed Jobs:</strong> {{ stats.processed }}</p>
+      <p><strong>Failed Jobs:</strong> {{ stats.failed }}</p>
+      <p><strong>Enqueued Jobs:</strong> {{ stats.enqueued }}</p>
+    </div>
+  </div>
+  
