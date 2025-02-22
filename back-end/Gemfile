@@ -14,6 +14,10 @@ gem 'mongo', '~> 2.21.0'
 gem 'dotenv', groups: [:development, :test]
 gem 'rack-cors'
 gem 'i18n', '>= 1.6', '< 2'
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
+gem 'whenever', require: false
+
 
 
 
