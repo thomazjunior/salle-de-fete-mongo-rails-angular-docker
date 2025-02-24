@@ -7,7 +7,7 @@ import { Socket } from 'ngx-socket-io';
   standalone: true,
   imports: [],
   templateUrl: './sidekiq-dashboard.component.html',
-  styleUrls: ['./sidekiq-dashboard.component.css']
+  styleUrls: ['./sidekiq-dashboard.component.scss']
 })
 export class SidekiqDashboardComponent implements OnInit {
   stats: any = {};
