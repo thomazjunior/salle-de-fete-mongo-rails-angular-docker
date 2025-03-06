@@ -1,64 +1,71 @@
 source "https://rubygems.org"
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '7.2.2'
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 2.1"
-# Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
-# Build JSON APIs with ease [https://github.com/rails/jbuilder]
-# gem "jbuilder"
-# mongodb
-gem "mongoid", "~> 9.0.0"
-gem 'mongo', '~> 2.21.0'
-gem 'dotenv', groups: [:development, :test]
-gem 'rack-cors'
-gem 'i18n', '>= 1.6', '< 2'
-gem 'sidekiq'
-gem 'sidekiq-scheduler'
-gem 'whenever', require: false
+# Utiliser la dernière version de Rails depuis GitHub : gem "rails", github: "rails/rails", branch: "main"
+gem 'rails', '7.2.2'  # Utilise la version 7.2.2 de Rails
 
+# Utiliser sqlite3 comme base de données pour Active Record
+gem "sqlite3", ">= 2.1"  # Assure la compatibilité avec la version 2.1 ou supérieure de sqlite3
 
+# Utiliser le serveur web Puma pour le déploiement
+gem "puma", ">= 5.0"  # Puma est un serveur web performant
 
+# Construire facilement des APIs JSON avec Jbuilder (optionnel)
+# gem "jbuilder"  # Commenté si non utilisé
 
+# Pour utiliser MongoDB comme base de données avec Mongoid
+gem "mongoid", "~> 9.0.0"  # Mongoid est un ODM pour MongoDB
+gem 'mongo', '~> 2.21.0'  # Bibliothèque MongoDB pour Ruby
 
+# Charger des variables d'environnement à partir d'un fichier .env
+gem 'dotenv', groups: [:development, :test]  # Permet de gérer les variables d'environnement en développement et test
 
+# Gérer les Cross-Origin Resource Sharing (CORS) avec Rack
+gem 'rack-cors'  # Utilisé pour autoriser les requêtes entre origines différentes
 
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+# Utiliser I18n pour la gestion de l'internationalisation (traduction des applications)
+gem 'i18n', '>= 1.6', '< 2'  # Bibliothèque pour l'internationalisation des applications Rails
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+# Gérer les jobs en arrière-plan avec Sidekiq
+gem 'sidekiq'  # Sidekiq permet de gérer les tâches en arrière-plan de manière performante
+gem 'sidekiq-scheduler'  # Permet de planifier les tâches avec Sidekiq
 
-# Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
-gem "solid_cache"
-gem "solid_queue"
-gem "solid_cable"
+# Utiliser Whenever pour la gestion des tâches cron
+gem 'whenever', require: false  # Planification de tâches cron via un fichier Ruby
 
-# Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
+# Utiliser Active Model pour la gestion des mots de passe sécurisés
+# gem "bcrypt", "~> 3.1.7"  # Commenté si non utilisé
 
-# Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
-gem "kamal", require: false
+# Windows ne contient pas les fichiers zoneinfo, donc on inclut tzinfo-data
+gem "tzinfo-data", platforms: %i[ windows jruby ]  # Cette gem est nécessaire sur Windows et JRuby pour gérer les fuseaux horaires
 
-# Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
-gem "thruster", require: false
+# Utiliser des adaptateurs basés sur la base de données pour Rails.cache, Active Job et Action Cable
+gem "solid_cache"  # Cache des données dans la base de données pour améliorer les performances
+gem "solid_queue"  # File d'attente basée sur la base de données pour Active Job
+gem "solid_cable"  # Utilisé pour les connexions WebSocket via Action Cable
 
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+# Réduire les temps de démarrage grâce au cache (nécessaire dans config/boot.rb)
+gem "bootsnap", require: false  # Améliore les temps de démarrage en mettant en cache les résultats de l'analyse du code
 
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
-# gem "rack-cors"
+# Déployer l'application dans n'importe quel environnement Docker
+gem "kamal", require: false  # Kamal permet de déployer facilement dans des conteneurs Docker
 
+# Ajouter la mise en cache et la compression des assets HTTP avec Puma
+gem "thruster", require: false  # Thruster accélère le traitement des assets dans Puma
+
+# Utiliser les variantes Active Storage pour le traitement des images (optionnel)
+# gem "image_processing", "~> 1.2"  # Commenté si non utilisé
+
+# Utiliser Rack CORS pour permettre les requêtes Ajax entre origines différentes
+# gem "rack-cors"  # Commenté si non utilisé
+
+# Groupes pour développement et tests
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  # Utiliser le débogueur Ruby pour faciliter le débogage dans les environnements de développement et test
+  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"  # Débogueur pour le développement
 
-  # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
-  gem "brakeman", require: false
+  # Analyser les vulnérabilités de sécurité avec Brakeman
+  gem "brakeman", require: false  # Brakeman scanne l'application pour détecter des failles de sécurité
 
-  # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
-  gem "rubocop-rails-omakase", require: false
+  # Utiliser RuboCop pour un style de code Ruby conforme aux bonnes pratiques
+  gem "rubocop-rails-omakase", require: false  # RuboCop pour respecter les conventions de style Ruby
 end
-
-
