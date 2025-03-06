@@ -75,4 +75,4 @@ docker-compose.override.yml
 .kamal
 .github
 .gitattributes
-.rubocop.yml
+

@@ -1,0 +1,75 @@
+# Configuration RuboCop pour Rails avec style Omakase
+
+inherit_gem:
+  rubocop-rails-omakase: rubocop.yml  # Hérite des règles de base du style Omakase
+
+# ------------------- Personnalisation des règles -------------------
+# Ce fichier permet de personnaliser ou d'ajouter des règles spécifiques
+# à notre projet pour répondre à nos conventions internes de codage.
+
+# =========================== Alignement ============================
+# L'alignement des éléments dans le code source est une question de lisibilité.
+# Utiliser l'alignement dans certaines structures de code améliore la compréhension rapide.
+
+# Aligner les paramètres de méthodes, de classes et de blocs
+Layout/AlignParameters:
+  Enabled: true  # Active l'alignement des paramètres dans les appels de méthodes
+  EnforcedStyle: with_first_parameter  # Aligne tous les paramètres sur le premier paramètre
+
+# Aligner les hash-rocket dans les hashes de manière cohérente
+Layout/AlignHash:
+  Enabled: true  # Active l'alignement des paires clé-valeur dans les hashes
+  EnforcedStyle: hash_rockets  # Utilise les hash-rocket (`=>`) pour l'alignement
+
+# ========================= Espaces et ponctuation ==========================
+# Contrôler l'utilisation des espaces et de la ponctuation pour améliorer la lisibilité.
+
+# Espaces autour des crochets dans les littéraux de tableau
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: false  # Désactive l'ajout d'espaces à l'intérieur des crochets
+
+# S'assurer qu'il n'y ait pas d'espaces inutiles avant ou après les parenthèses
+Layout/SpaceAroundOperators:
+  Enabled: true  # Active la vérification des espaces autour des opérateurs
+  EnforcedStyle: no_space  # Ne permet pas d'espaces autour des opérateurs comme `=` ou `+`
+
+# ===================== Contrôle des bonnes pratiques =====================
+# Ces règles sont importantes pour maintenir la qualité du code et les bonnes pratiques
+# en matière de sécurité et de performance.
+
+# S'assurer que tous les fichiers contiennent un `frozen_string_literal: true` en haut
+# pour améliorer les performances en Rails.
+Lint/FrozenStringLiteralComment:
+  Enabled: true  # Force l'ajout de `# frozen_string_literal: true` dans les fichiers Ruby
+
+# Contrôle de l'utilisation des variables d'instance et des variables globales
+# pour éviter les effets de bord difficiles à déboguer.
+Style/GlobalVars:
+  Enabled: true  # Interdit l'utilisation de variables globales (par exemple, $variable)
+
+# =========================== Sécurité ============================
+# Certaines règles sont spécifiques à la sécurité et au respect des bonnes pratiques.
+
+# Éviter les chaînes de connexion en clair dans le code source
+Security/Eval:
+  Enabled: true  # Active l'interdiction de l'utilisation de `eval`, qui peut exposer à des vulnérabilités
+
+# ===================== Organisation des fichiers et des classes =====================
+
+# Veiller à ce que les classes soient bien organisées selon les conventions de Rails
+Rails/UniqueValidationWithoutIndex:
+  Enabled: true  # S'assure qu'un index est ajouté pour les validations d'unicité dans la base de données
+
+# ============================= Exemples d'ajout de règles supplémentaires =====================
+
+# L'indentation correcte est essentielle pour la lisibilité du code
+Layout/IndentationWidth:
+  Enabled: true  # Force une indentation correcte avec une largeur de 2 espaces
+  Width: 2  # L'indentation doit être de 2 espaces (convention Ruby)
+
+# ===================== Désactivation de certaines règles =====================
+
+# Si une règle ne convient pas à notre style, nous pouvons la désactiver.
+# Exemple : Désactiver la vérification du nombre de caractères par ligne.
+Layout/LineLength:
+  Enabled: false  # Désactive la vérification de la longueur des lignes (ligne trop longue)
