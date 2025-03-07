@@ -1,27 +1,46 @@
-/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
-/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+/* Pour en savoir plus sur le fichier de configuration TypeScript : https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* Pour en savoir plus sur les options du compilateur Angular : https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
-    "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "moduleResolution": "bundler",
-    "importHelpers": true,
-    "target": "ES2022",
-    "module": "ES2022"
+    "outDir": "./dist/out-tsc", // Répertoire de sortie pour les fichiers compilés
+    "strict": true, // Active toutes les vérifications strictes de TypeScript
+    "noImplicitAny": true, // Interdit l'utilisation implicite de "any"
+    "noImplicitOverride": true, // Oblige à utiliser "override" lorsqu'une méthode est redéfinie
+    "noPropertyAccessFromIndexSignature": true, // Interdit l'accès direct aux propriétés d'une signature d'index
+    "noImplicitReturns": true, // Exige un retour explicite pour toutes les fonctions
+    "noFallthroughCasesInSwitch": true, // Empêche les cas non gérés dans un switch
+    "skipLibCheck": true, // Ignore la vérification des bibliothèques de type
+    "isolatedModules": true, // Vérifie que chaque fichier est compilable indépendamment
+    "esModuleInterop": true, // Active la compatibilité avec les modules ES
+    "experimentalDecorators": true, // Active les décorateurs expérimentaux
+    "emitDecoratorMetadata": true, // Génère les métadonnées pour les décorateurs
+    "moduleResolution": "bundler", // Définit la résolution des modules
+    "importHelpers": true, // Utilise tslib pour réduire la duplication du code
+    "resolveJsonModule": true, // Permet d'importer des fichiers JSON
+    "allowSyntheticDefaultImports": true, // Permet l'importation par défaut de modules sans valeur "default"
+    "forceConsistentCasingInFileNames": true, // Empêche les erreurs de casse dans les noms de fichiers
+    "exactOptionalPropertyTypes": true, // Vérifie les types exacts des propriétés optionnelles
+    "useDefineForClassFields": true, // Utilise "define" pour les champs de classe
+    "allowUnusedLabels": false, // Interdit les étiquettes inutilisées
+    "allowUnreachableCode": false, // Interdit le code inatteignable
+    "noUncheckedIndexedAccess": true, // Vérifie l'accès aux index de tableau/objet non définis
+    "target": "ES2022", // Version ECMAScript cible
+    "module": "ES2022", // Module ECMAScript cible
+    "sourceMap": true, // Génère une carte source pour faciliter le débogage
+    "declaration": true, // Génère des fichiers de déclaration TypeScript
+    "declarationMap": true, // Génère des cartes pour les fichiers de déclaration
+    "removeComments": false, // Conserve les commentaires dans les fichiers compilés
+    "incremental": true // Active la compilation incrémentale pour de meilleures performances
   },
   "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "enableI18nLegacyMessageIdFormat": false, // Désactive l'ancien format d'ID pour l'internationalisation
+    "strictInjectionParameters": true, // Vérifie strictement les paramètres d'injection
+    "strictInputAccessModifiers": true, // Vérifie strictement les modificateurs d'accès des entrées
+    "strictTemplates": true, // Active la vérification stricte des templates Angular
+    "fullTemplateTypeCheck": true, // Vérifie pleinement les types dans les templates
+    "strictDomLocalRefTypes": true, // Vérifie les références locales DOM dans les templates
+    "preserveWhitespaces": false, // Supprime les espaces inutiles dans les templates Angular
+    "i18nInLocale": "fr" // Définit la langue de l'application sur le français
   }
 }
