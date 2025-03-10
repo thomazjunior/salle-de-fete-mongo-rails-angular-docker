@@ -23,7 +23,7 @@ describe('ClientActionsDirective', () => {
 
   it("devrait émettre l'événement clientUpdated lorsque la mise à jour est réussie", () => {
     // Création d'un client factice pour le test
-    const mockClient: Client = { id: '123', name: 'Client Test', phone_number: '123', email: 'test@test.com' };
+    const mockClient: Client = { id: '123', name: 'Client Test', phone_number: '123', email: 'test@test.com', address: '' };
     directive.client = mockClient;
     spyOn(directive.clientUpdated, 'emit'); // Espionne l'événement pour vérifier s'il est déclenché
     mockClientService.updateClient.and.returnValue(of(mockClient)); // Simule une mise à jour réussie
@@ -36,14 +36,14 @@ describe('ClientActionsDirective', () => {
 
   it("ne devrait pas appeler updateClient si l'ID du client est null", () => {
     // Simule un client sans ID
-    directive.client = { id: null, name: 'Client Test' } as Client;
+    directive.client = { id: '', name: 'Client Test', phone_number: '123', email: '', address: '' } as Client;
     directive.openEditClientModal();
     expect(mockClientService.updateClient).not.toHaveBeenCalled(); // Vérifie que updateClient n'est pas appelé
   });
 
   it("devrait gérer l'erreur de updateClient", () => {
     // Simule une erreur lors de la mise à jour du client
-    const mockClient: Client = { id: '123', name: 'Client Test' };
+    const mockClient: Client = { id: '123', name: 'Client Test', phone_number: '123', email: '', address: '' };
     directive.client = mockClient;
     spyOn(console, 'error'); // Espionne la console pour vérifier si l'erreur est loggée
     mockClientService.updateClient.and.returnValue(throwError(() => new Error('Erreur de mise à jour')));
@@ -56,8 +56,8 @@ describe('ClientActionsDirective', () => {
   it("devrait émettre l'événement clientDeleted lorsque la suppression est confirmée", () => {
     spyOn(window, 'confirm').and.returnValue(true); // Simule la confirmation de suppression
     spyOn(directive.clientDeleted, 'emit'); // Espionne l'événement pour vérifier s'il est déclenché
-    directive.client = { id: '123', name: 'Client Test' };
-    mockClientService.deleteClient.and.returnValue(of(null)); // Simule une suppression réussie
+    directive.client = { id: '123', name: 'Client Test', phone_number: '123', email: '', address: '' };
+    mockClientService.deleteClient.and.returnValue(of()); // Simule une suppression réussie
 
     directive.openDeleteConfirmDialog();
 
@@ -67,7 +67,7 @@ describe('ClientActionsDirective', () => {
 
   it("ne devrait pas appeler deleteClient si la suppression est annulée", () => {
     spyOn(window, 'confirm').and.returnValue(false); // Simule l'annulation de la suppression
-    directive.client = { id: '123', name: 'Client Test' };
+    directive.client = { id: '123', name: 'Client Test', phone_number: '123', email: '', address: '' };
 
     directive.openDeleteConfirmDialog();
 
@@ -77,7 +77,7 @@ describe('ClientActionsDirective', () => {
   it("devrait gérer l'erreur de deleteClient", () => {
     spyOn(window, 'confirm').and.returnValue(true); // Simule la confirmation de suppression
     spyOn(console, 'error'); // Espionne la console pour vérifier si l'erreur est loggée
-    directive.client = { id: '123', name: 'Client Test' };
+    directive.client = { id: '123', name: 'Client Test', phone_number: '123', email: '', address: ''};
     mockClientService.deleteClient.and.returnValue(throwError(() => new Error('Erreur de suppression')));
 
     directive.openDeleteConfirmDialog();
