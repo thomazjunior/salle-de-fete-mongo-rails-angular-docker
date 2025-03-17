@@ -1,24 +1,28 @@
-# Be sure to restart your server when you modify this file.
+# Assurez-vous de redémarrer votre serveur lorsque vous modifiez ce fichier.
 
-# Avoid CORS issues when API is called from the frontend app.
-# Handle Cross-Origin Resource Sharing (CORS) in order to accept cross-origin Ajax requests.
+# Évitez les problèmes de CORS lorsque l'API est appelée depuis l'application frontend.
+# Gérez le partage des ressources entre origines (CORS) afin d'accepter les requêtes Ajax cross-origin.
 
-# Read more: https://github.com/cyu/rack-cors
-
-# Rails.application.config.middleware.insert_before 0, Rack::Cors do
-#   allow do
-#     origins "example.com"
-#
-#     resource "*",
-#       headers: :any,
-#       methods: [:get, :post, :put, :patch, :delete, :options, :head]
-#   end
-# end
+# Lire plus : https://github.com/cyu/rack-cors
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
-    allow do
-      origins 'http://localhost:4200' # adjust this URL based on your setup
-      resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options, :head]
-    end
+  allow do
+    origins 'http://localhost:4200', 'https://mon-domaine.com', 'https://api.trusted.com'
+
+    resource '*',
+      headers: %w(Authorization Content-Type Accept X-Requested-With),
+      expose: %w(Authorization X-CSRF-Token),
+      methods: [:get, :post, :put, :patch, :delete, :options, :head],
+      credentials: true,
+      max_age: 600 # Cache des pré-vérifications pendant 10 minutes
   end
-  
+
+  allow do
+    origins '*' # Autoriser toutes les origines uniquement pour les requêtes GET et OPTIONS
+    
+    resource '*',
+      headers: :any,
+      methods: [:get, :options],
+      max_age: 300
+  end
+end
