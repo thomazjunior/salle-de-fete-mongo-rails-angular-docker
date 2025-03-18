@@ -1,0 +1,43 @@
+<!-- app/views/clients/index.html.erb -->
+<h1>Liste des Clients</h1>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nom</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @clients.each do |client| %>
+      <tr>
+        <td><%= client.id %></td>
+        <td><%= client.name %></td>
+        <td><%= client.email %></td>
+        <td>
+          <!-- Lien pour afficher les détails d'un client -->
+          <%= link_to 'Voir', client_path(client) %> |
+          <!-- Lien pour modifier un client -->
+          <%= link_to 'Modifier', edit_client_path(client) %> |
+          <!-- Lien pour supprimer un client avec confirmation -->
+          <%= link_to 'Supprimer', client_path(client), method: :delete, data: { confirm: 'Êtes-vous sûr ?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- Lien pour ajouter un nouveau client -->
+<%= link_to 'Nouveau Client', new_client_path %>
+
+<!-- app/views/clients/show.html.erb -->
+<h1>Détails du Client</h1>
+<p><strong>ID:</strong> <%= @client.id %></p>
+<p><strong>Nom:</strong> <%= @client.name %></p>
+<p><strong>Email:</strong> <%= @client.email %></p>
+
+<!-- Lien pour modifier le client actuel -->
+<%= link_to 'Modifier', edit_client_path(@client) %> |
+<!-- Lien pour retourner à la liste des clients -->
+<%= link_to 'Retour à la liste', clients_path %>
